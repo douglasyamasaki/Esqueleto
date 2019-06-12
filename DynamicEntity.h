@@ -1,17 +1,10 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "Entity.h"
-#include "Animator.h"
-class DynamicEntity : public Entity , public Animator
+#include "Animation.h"
+class DynamicEntity : public Entity , public Animation
 {
-private:
-	sf::Vector2f vel;
-	sf::Vector2f acel;
 public:
-	DynamicEntity(sf::Vector2f size , sf::Vector2f pos , sf::Texture* texture);
-	~DynamicEntity();
-	const sf::Vector2f getVel() { return vel; }
-	const sf::Vector2f getAcel() { return acel;  }
-	virtual void update();
-
+	DynamicEntity(sf::Vector2f size, sf::Vector2f pos, sf::Texture* texture, sf::Vector2u imgCounter, float times);
 };
 

@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 class Entity : public sf::RectangleShape
 {
+private:
 public:
-	Entity(const sf::Vector2f size, const sf::Vector2f pos, sf::Texture* texture);
-	~Entity();
+	Entity(sf::Vector2f size, sf::Vector2f pos, sf::Texture* texture);
 };
 
