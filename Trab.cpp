@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
-#include "DynamicEntity.h"
+#include "Player.h"
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
 	sf::Texture tuxtext;
 	tuxtext.loadFromFile("tux.png");
-	DynamicEntity atum(sf::Vector2f(100, 100), sf::Vector2f(50, 50), &tuxtext , sf::Vector2u(3, 9), 0.1);
+	Player atum(sf::Vector2f(100, 100), sf::Vector2f(50, 50), &tuxtext , sf::Vector2u(3, 9), 0.1,sf::Vector2f(100.0f,0.0f));
 	float deltat = 0;
 	sf::Clock clock;
 	while (window.isOpen())
@@ -18,8 +18,7 @@ int main()
 				window.close();
 		}
 
-		atum.UpdateA(0, deltat);
-		atum.setTextureRect(atum.getuvRect());
+		atum.Update(deltat);
 		window.clear();
 		window.draw(atum);
 		window.display();
