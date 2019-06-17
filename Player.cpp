@@ -32,7 +32,9 @@ void Player::Update(float deltat)
 	}
 	UpdateA(row, deltat, faceRight);
 	setTextureRect(getuvRect());
+	if (!blocked){
 	move(movement);
 	moveHB(movement.x, movement.y);
+	}
 
 }

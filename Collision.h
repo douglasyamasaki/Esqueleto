@@ -13,5 +13,6 @@ public:
 	sf::RectangleShape getHB() { return hitbox; }
 protected:
 	sf::RectangleShape hitbox;
+	bool blocked;
 };
 

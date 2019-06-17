@@ -3,20 +3,20 @@
 Collision::Collision(sf::Vector2f hitboxSize)
 {
 	hitbox.setSize(hitboxSize);
+	blocked = false;
 }
 
 bool Collision::checkCollision(Collision* other, float push)
 {
-	sf::Vector2f otherPos = other->getPos();
+	sf::Vector2f otherPos = other->getHB().getPosition();
 	sf::Vector2f otherHs = other->getHS();
 	sf::Vector2f thisPos = getPos();
 	sf::Vector2f thisHs = getHS();
-
 	float deltaX = otherPos.x - thisPos.x;
 	float deltaY = otherPos.y - thisPos.y;
 	float interX = abs(deltaX) - (otherHs.x + thisHs.x);
 	float interY = abs(deltaY) - (otherHs.y + thisHs.y);
-
+	printf("%f %f %f %f %f %f %f %f\n", otherPos.x, otherPos.y, thisPos.x, thisPos.y, otherHs.x,otherHs.y,thisHs.x,thisHs.y);
 	if (interX < 0.0f && interY < 0.0f) {
 
 		push = std::min(std::max(push, 0.0f), 1.0f);
@@ -41,7 +41,9 @@ bool Collision::checkCollision(Collision* other, float push)
 				other->moveHB(0.0f ,-interY * push);
 			}
 		}
+		blocked = true;
 		return true;
 	}
+	blocked = false;
 	return false;
 }

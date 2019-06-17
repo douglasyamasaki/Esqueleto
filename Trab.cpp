@@ -12,10 +12,11 @@ int main()
 	sf::Texture tuxtext;
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 	tuxtext.loadFromFile("tux.png");
-	Player atum(sf::Vector2f(100, 100), sf::Vector2f(25, 25), &tuxtext, sf::Vector2u(3, 9), 0.1, sf::Vector2f(100, 0), sf::Vector2f(0, 0), sf::Vector2f(100, 100));
+	Player atum(sf::Vector2f(100, 100), sf::Vector2f(25, 25), &tuxtext, sf::Vector2u(3, 9), 0.1, sf::Vector2f(100, 0), sf::Vector2f(0, 50), sf::Vector2f(100, 100));
+	atum.setFillColor(sf::Color::Red);
 	float deltat = 0;
 	sf::Clock clock;
-	//atum.setOrigin(atum.getSize() / 2.0f);
+	atum.setOrigin(atum.getSize() / 2.0f);
 	float aspectRatio = float(window.getSize().x / float(window.getSize().y));
 
 	Platform platform1(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(500.0f, 100.0f));
@@ -33,8 +34,7 @@ int main()
 		}
 
 		atum.Update(deltat);
-		cout << atum.getPosition().x << atum.getPosition().y << atum.getHB().getPosition().x<< atum.getHB().getPosition().y << endl;
-		platform1.getCol()->checkCollision(atum.getCol(),0.0f);
+		platform1.getCol()->checkCollision(atum.getCol(),1.0f);
 		view.setCenter(atum.getPosition());
 		window.clear();
 		window.setView(view);
