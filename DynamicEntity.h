@@ -2,9 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "Animation.h"
-class DynamicEntity : public Entity , public Animation
+#include "Collision.h"
+class DynamicEntity : public Entity , public Animation , public Collision
 {
 public:
-	DynamicEntity(sf::Vector2f size, sf::Vector2f pos, sf::Texture* texture, sf::Vector2u imgCounter, float times);
+	DynamicEntity(sf::Vector2f size, sf::Vector2f pos, sf::Texture* texture, sf::Vector2u imgCounter, float times, sf::Vector2f deslocamento, sf::Vector2f hitboxArea);
 };
 
