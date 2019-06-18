@@ -5,7 +5,8 @@ DynamicEntity::DynamicEntity(sf::Vector2f size, sf::Vector2f pos, sf::Texture* t
 	Animation(texture, imgCounter, times), 
 	Collision (hitboxArea)
 {
+	this->deslocamento = deslocamento;
 	hitbox.setFillColor(sf::Color::Blue);
 	hitbox.setOrigin(hitboxArea / 2.0f);
-	hitbox.setPosition(pos += sf::Vector2f(50,50));
+	hitbox.setPosition(pos += deslocamento);
 }

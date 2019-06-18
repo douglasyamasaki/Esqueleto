@@ -8,11 +8,11 @@ using namespace std;
 static const float VIEW_HEIGHT = 1000;
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
 	sf::Texture tuxtext;
 	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 	tuxtext.loadFromFile("tux.png");
-	Player atum(sf::Vector2f(100, 100), sf::Vector2f(25, 25), &tuxtext, sf::Vector2u(3, 9), 0.1, sf::Vector2f(100, 0), sf::Vector2f(0, 50), sf::Vector2f(100, 100));
+	Player atum(sf::Vector2f(100, 100), sf::Vector2f(25, 25), &tuxtext, sf::Vector2u(3, 9), 0.1, sf::Vector2f(100, 0), sf::Vector2f(50, 50), sf::Vector2f(100, 100));
 	atum.setFillColor(sf::Color::Red);
 	float deltat = 0;
 	sf::Clock clock;
@@ -32,9 +32,8 @@ int main()
 				view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 			}
 		}
-
+		platform1.getCol()->checkCollision(atum.getCol(), 1.0f);
 		atum.Update(deltat);
-		platform1.getCol()->checkCollision(atum.getCol(),1.0f);
 		view.setCenter(atum.getPosition());
 		window.clear();
 		window.setView(view);

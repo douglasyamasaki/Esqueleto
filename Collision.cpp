@@ -16,11 +16,9 @@ bool Collision::checkCollision(Collision* other, float push)
 	float deltaY = otherPos.y - thisPos.y;
 	float interX = abs(deltaX) - (otherHs.x + thisHs.x);
 	float interY = abs(deltaY) - (otherHs.y + thisHs.y);
-	printf("%f %f %f %f %f %f %f %f\n", otherPos.x, otherPos.y, thisPos.x, thisPos.y, otherHs.x,otherHs.y,thisHs.x,thisHs.y);
 	if (interX < 0.0f && interY < 0.0f) {
 
 		push = std::min(std::max(push, 0.0f), 1.0f);
-
 		if (interX > interY) {
 			if (deltaX > 0.0f){
 				moveHB(interX * (1.0f - push), 0.0f);
@@ -28,7 +26,7 @@ bool Collision::checkCollision(Collision* other, float push)
 			}
 			else {
 				moveHB(-interX * (1.0f - push), 0.0f);
-				other->moveHB(-interX * push, 0.0f);
+				other->moveHB(interX * push, 0.0f);
 			}
 		}
 		else {
@@ -38,12 +36,12 @@ bool Collision::checkCollision(Collision* other, float push)
 			}
 			else {
 				moveHB(0.0f, -interY * (1.0f - push));
-				other->moveHB(0.0f ,-interY * push);
+				other->moveHB(0.0f ,interY * push);
 			}
 		}
-		blocked = true;
+		this->blocked = true;
 		return true;
 	}
-	blocked = false;
+	this->blocked = false;
 	return false;
 }

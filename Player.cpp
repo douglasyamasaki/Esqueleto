@@ -22,7 +22,7 @@ void Player::Update(float deltat)
 
 	if (movement.x == 0)
 		row = 0;
-	else{
+	else {
 		row = 1;
 
 		if (movement.x > 0.0f)
@@ -32,9 +32,6 @@ void Player::Update(float deltat)
 	}
 	UpdateA(row, deltat, faceRight);
 	setTextureRect(getuvRect());
-	if (!blocked){
-	move(movement);
 	moveHB(movement.x, movement.y);
-	}
-
+	setPosition(getPosition().x - deslocamento.x, getPosition().y - deslocamento.y);
 }
