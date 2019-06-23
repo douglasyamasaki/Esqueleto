@@ -1,47 +1,11 @@
+
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "Collision.h"
-#include "Platform.h"
-#include <iostream>
+#include "Principal.h"
 using namespace std;
 
+
 static const float VIEW_HEIGHT = 1000;
-int main()
-{
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
-	sf::Texture tuxtext;
-	sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
-	tuxtext.loadFromFile("tux.png");
-	Player atum(sf::Vector2f(100, 100), sf::Vector2f(25, 25), &tuxtext, sf::Vector2u(3, 9), 0.1, sf::Vector2f(100, 0), sf::Vector2f(50, 50), sf::Vector2f(100, 100));
-	atum.setFillColor(sf::Color::Red);
-	float deltat = 0;
-	sf::Clock clock;
-	atum.setOrigin(atum.getSize() / 2.0f);
-	float aspectRatio = float(window.getSize().x / float(window.getSize().y));
-
-	Platform platform1(nullptr, sf::Vector2f(400.0f, 200.0f), sf::Vector2f(500.0f, 100.0f));
-	while (window.isOpen())
-	{
-		deltat = clock.restart().asSeconds();
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			if (event.type == sf::Event::Resized) {
-				view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
-			}
-		}
-		platform1.getCol()->checkCollision(atum.getCol(), 1.0f);
-		atum.Update(deltat);
-		view.setCenter(atum.getPosition());
-		window.clear();
-		window.setView(view);
-		window.draw(atum);
-		window.draw(atum.getCol()->getHB());
-		platform1.draw(window);
-		window.display();
-	}
-
+int main() {
+	Principal obj;
 	return 0;
 }

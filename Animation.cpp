@@ -6,19 +6,31 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imgCounter, float times)
 	this->imgCounter = imgCounter;
 	timet = 0;
 	imgCurrent.x = 0;
+	imgCurrent.y = 0;
+	cont = 0;
+	lock = false;
 	uvRect.width = texture->getSize().x / float(imgCounter.x);
 	uvRect.height = texture->getSize().y / float(imgCounter.y);
 }
 
-void Animation::UpdateA(int row, float deltat, bool faceright)
+bool Animation::UpdateA(float deltat, bool faceright)
 {
-	imgCurrent.y = row;
+	
 	timet += deltat;
 	if (timet >= times) {
 		timet -= times;
 		imgCurrent.x++;
+		this->cont++;
+
 		if (imgCurrent.x >= imgCounter.x) {
 			imgCurrent.x = 0;
+			imgCurrent.y++;
+			this->cont++;
+			if (imgCurrent.y >= imgCounter.y) {
+				imgCurrent.y = 0;
+				lock = false;
+				cont = 0;
+			}
 		}
 	}
 	if (faceright){
@@ -30,5 +42,5 @@ void Animation::UpdateA(int row, float deltat, bool faceright)
 		uvRect.width = -abs(uvRect.width);
 	}
 	uvRect.top = imgCurrent.y * uvRect.height;
-	
+	return this->lock;
 }
